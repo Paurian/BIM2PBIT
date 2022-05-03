@@ -1,0 +1,130 @@
+{
+  "name": "MODEL-GUID",
+  "compatibilityLevel": 1550,
+  "model": {
+    "culture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [],
+    "relationships": [],
+    "cultures": [{
+      "name": "en-US",
+      "linguisticMetadata": {
+        "content": {
+          "Version": "1.0.0",
+          "Language": "en-US",
+          "DynamicImprovement": "HighConfidence"
+        },
+        "contentType": "json"
+      }
+    }],
+    "expressions": [{
+        "name": "RangeStart",
+        "kind": "m",
+        "expression": "#datetime(2017, 1, 1, 0, 0, 0) meta [IsParameterQuery=true, Type=\"DateTime\", IsParameterQueryRequired=true]",
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "RangeEnd",
+        "kind": "m",
+        "expression": "#datetime(2017, 1, 2, 0, 0, 0) meta [IsParameterQuery=true, Type=\"DateTime\", IsParameterQueryRequired=true]",
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "fx_DateTimeToDateString",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = (x as datetime) => DateTime.ToText(x, \"yyyy-MM-dd\")",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "fx_DateTimeToIntegerString",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = (x as datetime) => Number.ToText(Date.Year(x)*10000 + Date.Month(x)*100 + Date.Day(x))",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "fx_DateTimeToYearIntString",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = (x as datetime) => Number.ToText(Date.Year(x))",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "fx_SubtractOneDay",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = (x as datetime) => x - #duration(1, 0, 0, 0)",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "RangeStartIntegerString",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = fx_DateTimeToIntegerString(RangeStart)",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "RangeEndIntegerString",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = fx_DateTimeToIntegerString(RangeEnd)",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "RangeStartYearIntString",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = fx_DateTimeToYearIntString(RangeStart)",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      },
+      {
+        "name": "RangeEndBackOneIntString",
+        "kind": "m",
+        "expression": [
+          "let",
+          "    Source = fx_DateTimeToIntegerString(fx_SubtractOneDay(RangeEnd))",
+          "in",
+          "    Source"
+        ],
+        "queryGroup": "Variables And Functions"
+      }
+    ],
+    "queryGroups": [{
+      "folder": "Variables And Functions"
+    }]
+  }
+}
